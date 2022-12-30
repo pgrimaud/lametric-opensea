@@ -6,10 +6,12 @@ namespace LaMetric;
 
 use GuzzleHttp\Client;
 use LaMetric\Response\{Frame, FrameCollection};
+use GuzzleHttp\Exception\GuzzleException;
+use LaMetric\Helper\{IconHelper, TextHelper};
 
 class Api
 {
-    public function __construct(private Client $client, private array $credentials = [])
+    public function __construct(private Client $client)
     {
     }
 
@@ -17,41 +19,46 @@ class Api
      * @param array $parameters
      *
      * @return FrameCollection
+     * @throws GuzzleException
      */
     public function fetchData(array $parameters = []): FrameCollection
     {
-        /**
-         * You can call whatever API you want and extract data as array or object
-         *
-         * object $this->client (Guzzle HTTP) is available to make curl requests
-         * array $this->credentials contains sensitive data
-         * array $parameters (credentials) can contain sensitive data
-         *
-         * Here for example, we will return IP of user
-         */
+        $response = $this->client->request('GET', 'https://api.opensea.io/collection/' . $parameters['collection-slug']);
 
-        return $this->mapData([
-            'ip' => $_SERVER['REMOTE_HOST'] ?? 'UNKNOWN',
+        $data = json_decode((string)$response->getBody(), true);
+
+        return $this->mapData($parameters, [
+            'show-floor' => round($data['collection']['stats']['floor_price'], 2),
+            'show-1d-volume' => round($data['collection']['stats']['one_day_volume'], 2),
+            'show-7d-volume' => round($data['collection']['stats']['seven_day_volume'], 2),
+            'show-30d-volume' => round($data['collection']['stats']['thirty_day_volume'], 2),
+            'show-total-volume' => round($data['collection']['stats']['total_volume'], 2),
         ]);
     }
 
     /**
+     * @param array $parameters
      * @param array $data
      *
      * @return FrameCollection
      */
-    private function mapData(array $data = []): FrameCollection
+    private function mapData(array $parameters, array $data = []): FrameCollection
     {
         $frameCollection = new FrameCollection();
 
-        /**
-         * Transform data as FrameCollection and Frame
-         */
-        $frame = new Frame();
-        $frame->setText($data['ip']);
-        $frame->setIcon('');
+        foreach ($data as $key => $value) {
+            if (isset($parameters[$key]) && $parameters[$key] === 'true') {
+                $frame = new Frame();
+                $frame->setText(TextHelper::getText($key));
+                $frame->setIcon(IconHelper::getIcon($parameters['collection-slug']));
+                $frameCollection->addFrame($frame);
 
-        $frameCollection->addFrame($frame);
+                $frame = new Frame();
+                $frame->setText((string) $value);
+                $frame->setIcon('');
+                $frameCollection->addFrame($frame);
+            }
+        }
 
         return $frameCollection;
     }

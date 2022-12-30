@@ -30,8 +30,9 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
-        "phpstan/phpstan": "^0.12.88",
-        "friendsofphp/php-cs-fixer": "^3.0"
+        "phpstan/phpstan": "^1.12.88",
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "symfony/var-dumper": "^6.0"
     },
     "scripts": {
         "cs-fix": "@php ./vendor/bin/php-cs-fixer fix src --rules=@PSR12,-single_import_per_statement,group_import",
@@ -40,7 +41,6 @@
     },
     "scripts-descriptions": {
         "cs-fix": "Check and fix coding styles using PHP CS Fixer",
-        "phpstan": "Execute PHPStan analysis",
-        "test": "Launch PHPUnit test suite"
+        "phpstan": "Execute PHPStan analysis"
     }
 }

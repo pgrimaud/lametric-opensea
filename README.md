@@ -1,4 +1,4 @@
-# LaMetric App Starter
+# LaMetric Opensea
 
 This starter allow you to create LaMetric apps easily. (Indicator App)
 

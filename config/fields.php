@@ -4,26 +4,28 @@ use LaMetric\Field;
 
 return [
     [
-        'key'     => 'field-1',
+        'key'     => 'collection-slug',
         'type'    => Field::TEXT_TYPE,
-        'default' => 'hello',
+        'default' => 'mutant-ape-yacht-club',
     ],
     [
-        'key'  => 'field-2',
-        'type' => Field::NUMBER_TYPE,
-    ],
-    [
-        'key'  => 'field-3',
+        'key'  => 'show-floor',
         'type' => Field::SWITCH_TYPE,
     ],
     [
-        'key'     => 'field-4',
-        'type'    => Field::CHOICES_TYPE,
-        'choices' => [
-            'iron-man',
-            'captain-america',
-            'ant-man',
-            'thor',
-        ],
+        'key'  => 'show-1d-volume',
+        'type' => Field::SWITCH_TYPE,
+    ],
+    [
+        'key'  => 'show-7d-volume',
+        'type' => Field::SWITCH_TYPE,
+    ],
+    [
+        'key'  => 'show-30d-volume',
+        'type' => Field::SWITCH_TYPE,
+    ],
+    [
+        'key'  => 'show-total-volume',
+        'type' => Field::SWITCH_TYPE,
     ],
 ];
