@@ -10,10 +10,10 @@ class TextHelper
     {
         $text = [
             'show-floor' => 'Floor',
-            'show-1d-volume' => '1d volume',
-            'show-7d-volume' => '7d volume',
-            'show-30d-volume' => '30d volume',
-            'show-total-volume' => 'Total volume',
+            'show-1d-volume' => '1d vol',
+            'show-7d-volume' => '7d vol',
+            'show-30d-volume' => '30d vol',
+            'show-total-volume' => 'Total vol',
         ];
 
         return $text[$slug];
