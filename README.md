@@ -1,5 +1,8 @@
 # Opensea for LaMetric
 
+> [!CAUTION]
+> READ-ONLY : APP MIGRATED TO https://github.com/pgrimaud/lumiere
+
 Display Opensea statistics of a collection
 
 ![image](https://user-images.githubusercontent.com/1866496/210065456-43044af9-2616-4f0a-bcfe-d0b563f7c3d4.gif)
